@@ -11,9 +11,9 @@ export const currentStep = createReducer(
 export const dimensions = createReducer(
     {height:0, length:0, width: 0},
     {
-        [changeHeight]: state => state.height = 1,
-        [changeLength]: state => state.length = 1,
-        [changeWidth]: state => state.width = 1,
+        [changeHeight]: (state, action) => { state.height = action.payload },
+        [changeLength]: (state, action) => { state.length = action.payload },
+        [changeWidth]: (state, action) => { state.width = action.payload },
     }
 )
 
