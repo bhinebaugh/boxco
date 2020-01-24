@@ -6,11 +6,11 @@ const FormActions = ({isDisabled, hideBackButton = false, buttonText = "Next", n
     return(
         <div className="form-actions">
             {!hideBackButton &&
-                <button type="button" onClick={previousStep} className="btn btn-back">
+                <button type="button" onClick={() => previousStep()} className="btn btn-back">
                     back
                 </button>
             }
-            <button type="button" onClick={nextStep} className="btn btn-primary btn-next" disabled={isDisabled}>
+            <button type="button" onClick={() => nextStep()} className="btn btn-primary btn-next" disabled={isDisabled}>
                 {buttonText}
             </button>
         </div>
