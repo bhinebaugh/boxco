@@ -16,7 +16,7 @@ const StepContent = props => {
                     <Dimensions />
     
                     <div className="form-row">
-                        <label for="quantity">Quantity:</label>
+                        <label htmlFor="quantity">Quantity:</label>
                         <input type="number" name="quantity" id="quantity" value="0" min="0" step="1" />
                     </div>
                 </Step>
