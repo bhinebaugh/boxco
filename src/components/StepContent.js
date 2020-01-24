@@ -2,6 +2,7 @@ import React from 'react'
 import Dimensions from "./Dimensions"
 import Step from "./Step"
 import TotalCost from "./TotalCost"
+import { connect } from 'react-redux'
 
 const StepContent = props => {
 
@@ -141,4 +142,6 @@ const StepContent = props => {
     }
 }
 
-export default StepContent
+export default connect(
+    state => ({ activeId: state.currentStep }),
+)(StepContent)

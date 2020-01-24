@@ -1,15 +1,19 @@
 import React from 'react'
 import FormActions from './FormActions'
 
-const Step = props => {
-    let divId=`step-${props.stepId}`
+const Step = ({children, stepId, title}) => {
+    let divId=`step-${stepId}`
+    let buttonText = (stepId === 4) ? "Finish" : "Next"
     return(
         <div id={divId} className="content-step">
-            <h2>Step {props.stepId} - {props.title}</h2>
+            <h2>Step {stepId} - {title}</h2>
 
-            {props.children}
+            {children}
 
-            <FormActions />
+            <FormActions
+                buttonText={buttonText}
+                hideBackButton={stepId > 1 ? false : true}
+            />
         </div>
     )
 }

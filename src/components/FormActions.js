@@ -1,27 +1,23 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { nextStep, previousStep } from '../actions'
 
-const FormActions = (props) => {
-    // First step: no 'back'
-    // <div className="form-actions">
-    //     <button type="button" className="btn btn-primary btn-next" disabled>
-    //         Next
-    //     </button>
-    // </div>
-    // Final step: 'Finish' instead of 'Next'
-    // <button type="button" className="btn btn-primary btn-next">
-    //     Finish
-    // </button>
-
+const FormActions = ({isDisabled, hideBackButton = false, buttonText = "Next", nextStep, previousStep}) => {
     return(
         <div className="form-actions">
-            <button type="button" className="btn btn-back">
-                back
-            </button>
-            <button type="button" className="btn btn-primary btn-next" disabled>
-                Next
+            {!hideBackButton &&
+                <button type="button" onClick={previousStep} className="btn btn-back">
+                    back
+                </button>
+            }
+            <button type="button" onClick={nextStep} className="btn btn-primary btn-next" disabled={isDisabled}>
+                {buttonText}
             </button>
         </div>
     )
 }
 
-export default FormActions
+export default connect(
+    null,
+    { nextStep, previousStep }
+)(FormActions)
