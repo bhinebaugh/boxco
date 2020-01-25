@@ -1,5 +1,15 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { nextStep, previousStep, changeCardboardGrade, changeHeight, changeLength, changeWidth, changeQuantity } from "./actions"
+import {
+    nextStep,
+    previousStep,
+    addExtras,
+    changeCardboardGrade,
+    changePrintQuality,
+    changeHeight,
+    changeLength,
+    changeWidth,
+    changeQuantity,
+} from "./actions"
 
 export const currentStep = createReducer(
     1,
@@ -26,5 +36,11 @@ export const cardboard = createReducer(
     null,
     {
         [changeCardboardGrade]: (state, action) => action.payload
+    }
+)
+export const printQuality = createReducer(
+    null,
+    {
+        [changePrintQuality]: (state, action) => action.payload
     }
 )

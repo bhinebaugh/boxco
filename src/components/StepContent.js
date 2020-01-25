@@ -3,22 +3,34 @@ import Dimensions from "./Dimensions"
 import Step from "./Step"
 import TotalCost from "./TotalCost"
 import Quantity from "./Quantity"
-import Cardboard from "./Cardboard"
 import { connect } from 'react-redux'
+import RadioSet from './RadioSet'
+import { addExtras, changeCardboardGrade, changePrintQuality } from '../actions'
 
-const StepContent = props => {
+const printOptions = [
+    { name: "3 colours", value: "3-color", cost: 0.2 },
+    { name: "2 colours", value: "2-color", cost: 0.1 },
+    { name: "Black only", value: "black-only", cost: 0.05 },
+    { name: "No printing", value: "no-printing", cost: 0 },
+    { name: "FantasticBoxCo branding", value: "FantasticBoxCo-branding", cost: 0 }
+] // special logic for last option: 5% discount
+const cardboardOptions = [
+    { name: "A Grade", value: "A", cost: 0.2 },
+    { name: "B Grade", value: "B", cost: 0.1 },
+    { name: "C Grade", value: "C", cost: 0.05 }
+]
 
-    switch(props.activeId) {
+const StepContent = ({ activeId, grade, printQuality, addExtras, changeCardboardGrade, changePrintQuality }) => {
+
+    switch(activeId) {
         case 1:
             return (
                 <Step stepId={1} title="Dimensions &amp; Quantity">
                     <p className="intro">
                         Enter the width, height, length and quantity of the box(es) you require.
                     </p>
-    
                     <Dimensions />
                     <Quantity />
-    
                 </Step>
             )
         case 2:
@@ -28,59 +40,17 @@ const StepContent = props => {
                         <strong>FantasticBoxCo</strong> offer a variety of
                         grades of cardboard, each altering the price per m<sup>2</sup>:
                     </p>
-                    <Cardboard />
+                    <RadioSet handleChange={changeCardboardGrade} inputName="cardboard-grade" options={cardboardOptions} selectedValue={grade} />
                 </Step>
             )
         case 3:
             return (
                 <Step stepId={3} title="Print Quality">
-                <p className="intro">
-                    A variety of printing options are available for any
-                    branding / logos which are required:
-                </p>
-
-                <ol className="btn-radios-list">
-                    <li>
-                        <label>
-                            <input type="radio" name="print-quality" value="3-color" />
-                            <span className="btn btn-radio">
-                                3 colours<br />$0.20 m<sup>2</sup>
-                            </span>
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="radio" name="print-quality" value="2-color" />
-                            <span className="btn btn-radio">
-                                2 colours<br />$0.10 m<sup>2</sup>
-                            </span>
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="radio" name="print-quality" value="black-only" />
-                            <span className="btn btn-radio">
-                                Black only<br />$0.05 m<sup>2</sup>
-                            </span>
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="radio" name="print-quality" value="no-printing" />
-                            <span className="btn btn-radio">
-                                No printing<br />$0.00
-                            </span>
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="radio" name="print-quality" value="FantasticBoxCo-branding" />
-                            <span className="btn btn-radio">
-                                <strong>FantasticBoxCo</strong> branding<br />5% discount on total price
-                            </span>
-                        </label>
-                    </li>
-                </ol>
+                    <p className="intro">
+                        A variety of printing options are available for any
+                        branding / logos which are required:
+                    </p>
+                    <RadioSet handleChange={changePrintQuality} inputName="print-quality" options={printOptions} selectedValue={printQuality} />
                 </Step>
             )
         case 4:
@@ -116,5 +86,10 @@ const StepContent = props => {
 }
 
 export default connect(
-    state => ({ activeId: state.currentStep }),
+    state => ({
+        activeId: state.currentStep,
+        grade: state.cardboard,
+        printQuality: state.printQuality,
+    }),
+    { addExtras, changeCardboardGrade, changePrintQuality, }
 )(StepContent)

@@ -1,14 +1,15 @@
 import React from "react"
 import { Provider } from "react-redux"
 import { configureStore } from "@reduxjs/toolkit"
-import { cardboard, currentStep, dimensions, quantity } from "./reducers"
-import { Progress, StepContent, TotalCost, FormActions } from "./components"
+import { cardboard, currentStep, dimensions, printQuality, quantity } from "./reducers"
+import { Progress, StepContent } from "./components"
 
 const store = configureStore({
     reducer: {
         cardboard,
         currentStep,
         dimensions,
+        printQuality,
         quantity,
     }
 })
@@ -16,10 +17,10 @@ const store = configureStore({
 export default function App() {
     return (
         <Provider store={store}>
-        <Progress activeId={1} />
-        <section>
-            <StepContent activeId={1} />
-        </section>
+            <Progress activeId={1} />
+            <section>
+                <StepContent activeId={1} />
+            </section>
         </Provider>
     )
 }
