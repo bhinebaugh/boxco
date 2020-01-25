@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { addExtras } from "../actions"
 
-const Quantity = ({ addExtras, selectedExtras }) => {
+const Quantity = ({ addExtras, cardboard, selectedExtras }) => {
     return (
         <ol className="btn-radios-list">
             <li>
@@ -24,6 +24,7 @@ const Quantity = ({ addExtras, selectedExtras }) => {
                     <input
                         type="checkbox"
                         name="optional-extras"
+                        disabled={cardboard !== "A"}
                         checked={selectedExtras.includes("reinforced-bottom")}
                         onChange={(e) => addExtras(e.target.value)}
                         value="reinforced-bottom"
@@ -39,6 +40,9 @@ const Quantity = ({ addExtras, selectedExtras }) => {
 }
 
 export default connect(
-    state => ({ selectedExtras: state.selectedExtras }),
+    state => ({
+        cardboard: state.cardboard,
+        selectedExtras: state.selectedExtras,
+    }),
     { addExtras }
 )(Quantity)
