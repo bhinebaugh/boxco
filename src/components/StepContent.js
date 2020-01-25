@@ -2,6 +2,7 @@ import React from 'react'
 import Dimensions from "./Dimensions"
 import Step from "./Step"
 import TotalCost from "./TotalCost"
+import Quantity from "./Quantity"
 import { connect } from 'react-redux'
 
 const StepContent = props => {
@@ -15,11 +16,8 @@ const StepContent = props => {
                     </p>
     
                     <Dimensions />
+                    <Quantity />
     
-                    <div className="form-row">
-                        <label htmlFor="quantity">Quantity:</label>
-                        <input type="number" name="quantity" id="quantity" value="0" min="0" step="1" />
-                    </div>
                 </Step>
             )
         case 2:
