@@ -58,14 +58,16 @@ export const calculatePrice = ({dimensions, quantity, cardboard, printQuality, s
         case "black-only":
             // cost: 0.05
             printCharge = areaTotal * 0.05
+            break
         case "no-printing":
             // cost: 0
             break
         case "FantasticBoxCo-branding":
             // discount
             isDiscounted = true
+            break
         default:
-            //
+            break
     }
     price = price + printCharge
 
@@ -79,7 +81,7 @@ export const calculatePrice = ({dimensions, quantity, cardboard, printQuality, s
         price = price + (quantity.amount * 0.1)
     }
     if (selectedExtras.includes("reinforced-bottom")) {
-        if (cardboard == "A") { return null }
+        if (cardboard !== "A") { return null }
         price = price + (quantity.amount * 0.05)
     }
 

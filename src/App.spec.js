@@ -27,7 +27,7 @@ test("no quote with any dimension zero", () => {
         },
         printQuality: "2-color",
         selectedExtras: [],
-        quantity: { amount: 0 },
+        quantity: { amount: 1 },
     }
     let price=calculatePrice(settings)
     expect(price).toBeNull()
@@ -48,7 +48,7 @@ test("no quote if no cardboard grade chosen", () => {
         },
         printQuality: "2-color",
         selectedExtras: [],
-        quantity: { amount: 0 },
+        quantity: { amount: 1 },
     }
     let price=calculatePrice(settings)
     expect(price).toBeNull()
@@ -64,7 +64,7 @@ test("no quote if no print quality chosen", () => {
         },
         printQuality: null,
         selectedExtras: [],
-        quantity: { amount: 0 },
+        quantity: { amount: 1 },
     }
     let price=calculatePrice(settings)
     expect(price).toBeNull()
@@ -95,6 +95,24 @@ test("changing cardboard grade from B to A doubles price of unprinted box", () =
     let priceA = calculatePrice(settings)
     expect(priceA).toBeGreaterThan(priceB)
     expect(priceA).toBe(2*priceB)
+})
+
+test("grade C not available for boxes larger than 2M^2", () => {
+    let settings = {
+        cardboard: "C",
+        dimensions: {
+            height: .2,
+            length: 1,
+            width: 1
+        },
+        printQuality: null,
+        selectedExtras: [],
+        quantity: { amount: 1 },
+    }
+    let area = calculateArea(settings.dimensions)
+    let price=calculatePrice(settings)
+    expect(area).toBeGreaterThan(2)
+    expect(price).toBeNull()
 })
 
 // 3. print quality
@@ -183,7 +201,7 @@ test("extras: handles adds 20 cents to two boxes", () => {
 
 test("extras: reinforced adds 15 cents to three boxes", () => {
     let settings = {
-        cardboard: "B",
+        cardboard: "A",
         dimensions: {
             height: 1,
             length: 1,
@@ -200,9 +218,9 @@ test("extras: reinforced adds 15 cents to three boxes", () => {
 })
 
 // mutually exclusive options --> validation error
-test("reinforced bottom is not available with grade A", () => {
+test("reinforced bottom is only available with grade A", () => {
     let settings = {
-        cardboard: "A",
+        cardboard: "B",
         dimensions: {
             height: 1,
             length: 1,

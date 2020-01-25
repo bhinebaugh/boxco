@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { calculatePrice } from '../reducers'
+import { calculatePrice } from '../selectors'
 import StepSummary from './StepSummary'
 
 const Progress = ({ activeId, height, length, width, quantity, cardboard, printQuality, selectedExtras, price }) => {
