@@ -44,3 +44,15 @@ export const printQuality = createReducer(
         [changePrintQuality]: (state, action) => action.payload
     }
 )
+export const selectedExtras = createReducer(
+    [],
+    {
+        [addExtras]: (state, action) => {
+            if (state.includes(action.payload)) {
+                return state.filter(v => v !== action.payload)
+            } else {
+                state.push(action.payload)
+            }
+        }
+    }
+)

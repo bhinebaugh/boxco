@@ -3,6 +3,7 @@ import Dimensions from "./Dimensions"
 import Step from "./Step"
 import TotalCost from "./TotalCost"
 import Quantity from "./Quantity"
+import OptionalExtras from "./OptionalExtras"
 import { connect } from 'react-redux'
 import RadioSet from './RadioSet'
 import { addExtras, changeCardboardGrade, changePrintQuality } from '../actions'
@@ -56,26 +57,7 @@ const StepContent = ({ activeId, grade, printQuality, addExtras, changeCardboard
         case 4:
             return (
                 <Step stepId={4} title="Optional Extras">
-                <ol className="btn-radios-list">
-                    <li>
-                        <label>
-                            <input type="checkbox" name="optional-extras" value="handles" />
-                            <span className="btn btn-radio">
-                                Handles<br />$0.10 per box
-                            </span>
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" name="optional-extras" value="reinforced-bottom" />
-                            <span className="btn btn-radio">
-                                Reinforced bottom<br />$0.05 per box<br />
-                                <small>(only available with grade A cardboard)</small>
-                            </span>
-                        </label>
-                    </li>
-                </ol>
-
+                    <OptionalExtras />
                 </Step>
             )
         case 5:

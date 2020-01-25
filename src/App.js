@@ -1,7 +1,7 @@
 import React from "react"
 import { Provider } from "react-redux"
 import { configureStore } from "@reduxjs/toolkit"
-import { cardboard, currentStep, dimensions, printQuality, quantity } from "./reducers"
+import { cardboard, currentStep, dimensions, printQuality, selectedExtras, quantity } from "./reducers"
 import { Progress, StepContent } from "./components"
 
 const store = configureStore({
@@ -10,6 +10,7 @@ const store = configureStore({
         currentStep,
         dimensions,
         printQuality,
+        selectedExtras,
         quantity,
     }
 })
