@@ -12,7 +12,7 @@ test("no quote with zero quantity", () => {
         },
         printQuality: "2-color",
         selectedExtras: [],
-        quantity: { amount: 0 },
+        quantity: 0,
     }
     let price=calculatePrice(settings)
     expect(price).toBeNull()
@@ -27,7 +27,7 @@ test("no quote with any dimension zero", () => {
         },
         printQuality: "2-color",
         selectedExtras: [],
-        quantity: { amount: 1 },
+        quantity: 1,
     }
     let price=calculatePrice(settings)
     expect(price).toBeNull()
@@ -48,7 +48,7 @@ test("no quote if no cardboard grade chosen", () => {
         },
         printQuality: "2-color",
         selectedExtras: [],
-        quantity: { amount: 1 },
+        quantity: 1,
     }
     let price=calculatePrice(settings)
     expect(price).toBeNull()
@@ -64,7 +64,7 @@ test("no quote if no print quality chosen", () => {
         },
         printQuality: null,
         selectedExtras: [],
-        quantity: { amount: 1 },
+        quantity: 1,
     }
     let price=calculatePrice(settings)
     expect(price).toBeNull()
@@ -88,7 +88,7 @@ test("changing cardboard grade from B to A doubles price of unprinted box", () =
         },
         printQuality: "no-printing",
         selectedExtras: [],
-        quantity: { amount: 1 },
+        quantity: 1,
     }
     let priceB = calculatePrice(settings)
     settings.cardboard = "A"
@@ -107,7 +107,7 @@ test("grade C not available for boxes larger than 2M^2", () => {
         },
         printQuality: null,
         selectedExtras: [],
-        quantity: { amount: 1 },
+        quantity: 1,
     }
     let area = calculateArea(settings.dimensions)
     let price=calculatePrice(settings)
@@ -130,7 +130,7 @@ test("print quality: black adds 5 cents/m^2 compared to no printing", () => {
         },
         printQuality: "no-printing",
         selectedExtras: [],
-        quantity: { amount: 1 },
+        quantity: 1,
     }
     const pricePlain = calculatePrice(settings)
     settings.printQuality = "black-only"
@@ -152,7 +152,7 @@ test("print quality: branding reduces total price by 5%", () => {
         },
         printQuality: "FantasticBoxCo-branding",
         selectedExtras: [],
-        quantity: { amount: 1 },
+        quantity: 1,
     }
     const priceBranded = calculatePrice(settings)
     settings.printQuality = "no-printing"
@@ -175,7 +175,7 @@ test("extras are not required", () => {
         },
         printQuality: "no-printing",
         selectedExtras: [],
-        quantity: { amount: 1 },
+        quantity: 1,
     }
     const price = calculatePrice(settings)
     expect(price).not.toBe(0)
@@ -191,7 +191,7 @@ test("extras: handles adds 20 cents to two boxes", () => {
         },
         printQuality: "no-printing",
         selectedExtras: [],
-        quantity: { amount: 2 },
+        quantity: 2,
     }
     const price = calculatePrice(settings)
     settings.selectedExtras.push("handles")
@@ -209,7 +209,7 @@ test("extras: reinforced adds 15 cents to three boxes", () => {
         },
         printQuality: "no-printing",
         selectedExtras: [],
-        quantity: { amount: 3 },
+        quantity: 3,
     }
     const price = calculatePrice(settings)
     settings.selectedExtras.push("reinforced-bottom")
@@ -228,7 +228,7 @@ test("reinforced bottom is only available with grade A", () => {
         },
         printQuality: "no-printing",
         selectedExtras: ["reinforced-bottom"],
-        quantity: { amount: 1 },
+        quantity: 1,
     }
     const price = calculatePrice(settings)
     expect(price).toBeNull()

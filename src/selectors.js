@@ -8,7 +8,7 @@ export const calculateArea = ({height, length, width}) => {
 }
 
 export const calculatePrice = ({dimensions, quantity, cardboard, printQuality, selectedExtras}) => {
-    if (quantity.amount <= 0) { return null }
+    if (quantity <= 0) { return null }
     if (Object.keys(dimensions).some(key => dimensions[key] <= 0)) { return null }
     if (!cardboard) { return null }
     if (!printQuality) { return null }
@@ -19,7 +19,7 @@ export const calculatePrice = ({dimensions, quantity, cardboard, printQuality, s
     let isDiscounted = false
     let price = 0
     const areaPerBox = calculateArea(dimensions)
-    const areaTotal = areaPerBox * quantity.amount
+    const areaTotal = areaPerBox * quantity
 
     // 2. cardboard grade
     // A, B, or C
@@ -78,11 +78,11 @@ export const calculatePrice = ({dimensions, quantity, cardboard, printQuality, s
     // $.05 per reinforced bottom
 
     if (selectedExtras.includes("handles")) {
-        price = price + (quantity.amount * 0.1)
+        price = price + (quantity * 0.1)
     }
     if (selectedExtras.includes("reinforced-bottom")) {
         if (cardboard !== "A") { return null }
-        price = price + (quantity.amount * 0.05)
+        price = price + (quantity * 0.05)
     }
 
 

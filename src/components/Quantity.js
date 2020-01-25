@@ -12,6 +12,6 @@ const Quantity = ({ changeQuantity, quantity }) => {
 }
 
 export default connect(
-    state => ({ quantity: state.quantity.amount }),
+    state => ({ quantity: state.quantity }),
     { changeQuantity }
 )(Quantity)

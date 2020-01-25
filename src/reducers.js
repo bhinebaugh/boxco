@@ -27,9 +27,9 @@ export const dimensions = createReducer(
     }
 )
 export const quantity = createReducer(
-    {amount: 0},
+    0,
     {
-        [changeQuantity]: (state, action) => { state.amount = action.payload }
+        [changeQuantity]: (state, action) => action.payload
     }
 )
 export const cardboard = createReducer(

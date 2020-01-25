@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const TotalCost = (props) => {
+const TotalCost = ({ quantity, dimensions, cardboard, printQuality, selectedExtras }) => {
     return (
         <div id="total-cost" className="content-step">
             <h2>Total Cost</h2>
@@ -25,4 +26,6 @@ const TotalCost = (props) => {
     )
 }
 
-export default TotalCost
+export default connect(
+    state => state
+)(TotalCost)

@@ -25,7 +25,7 @@ const Progress = ({ activeId, height, length, width, quantity, cardboard, printQ
                 <li>
                     <a href="#total-cost" className="step step-total-cost">
                         <h3 className="step-total-cost-heading">Total Cost</h3>
-                        <div className="step-total-cost-value">${price}</div>
+                        <div className="step-total-cost-value">${ price ? price.toFixed(2) : "0.00"}</div>
                     </a>
                 </li>
             </ul>
@@ -39,7 +39,7 @@ export default connect(
         height: state.dimensions.height,
         length: state.dimensions.length,
         width: state.dimensions.width,
-        quantity: state.quantity.amount,
+        quantity: state.quantity,
         cardboard: state.cardboard,
         printQuality: state.printQuality,
         selectedExtras: state.selectedExtras,
