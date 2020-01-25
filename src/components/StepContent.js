@@ -21,12 +21,19 @@ const cardboardOptions = [
     { name: "C Grade", value: "C", cost: 0.05 }
 ]
 
-const StepContent = ({ activeId, grade, printQuality, addExtras, changeCardboardGrade, changePrintQuality }) => {
+const StepContent = ({ activeId, dimensions, quantity, grade, printQuality, addExtras, changeCardboardGrade, changePrintQuality }) => {
+
+    let isDisabled
 
     switch(activeId) {
         case 1:
+            isDisabled = (quantity <= 0 || Object.keys(dimensions).some(x => dimensions[x] <= 0))
             return (
-                <Step stepId={1} title="Dimensions &amp; Quantity">
+                <Step
+                    stepId={1}
+                    title="Dimensions &amp; Quantity"
+                    isDisabled={isDisabled}
+                >
                     <p className="intro">
                         Enter the width, height, length and quantity of the box(es) you require.
                     </p>
@@ -35,8 +42,13 @@ const StepContent = ({ activeId, grade, printQuality, addExtras, changeCardboard
                 </Step>
             )
         case 2:
+            isDisabled = !grade
             return (
-                <Step stepId={2} title="Cardboard Grade">
+                <Step
+                    stepId={2}
+                    title="Cardboard Grade"
+                    isDisabled={isDisabled}
+                >
                     <p className="intro">
                         <strong>FantasticBoxCo</strong> offer a variety of
                         grades of cardboard, each altering the price per m<sup>2</sup>:
@@ -45,8 +57,13 @@ const StepContent = ({ activeId, grade, printQuality, addExtras, changeCardboard
                 </Step>
             )
         case 3:
+            isDisabled = !printQuality
             return (
-                <Step stepId={3} title="Print Quality">
+                <Step
+                    stepId={3}
+                    title="Print Quality"
+                    isDisabled={isDisabled}
+                >
                     <p className="intro">
                         A variety of printing options are available for any
                         branding / logos which are required:
@@ -70,6 +87,8 @@ const StepContent = ({ activeId, grade, printQuality, addExtras, changeCardboard
 export default connect(
     state => ({
         activeId: state.currentStep,
+        dimensions: state.dimensions,
+        quantity: state.quantity,
         grade: state.cardboard,
         printQuality: state.printQuality,
     }),

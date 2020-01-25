@@ -1,7 +1,7 @@
 import React from 'react'
 import FormActions from './FormActions'
 
-const Step = ({children, stepId, title}) => {
+const Step = ({children, isDisabled, stepId, title}) => {
     let divId=`step-${stepId}`
     let buttonText = (stepId === 4) ? "Finish" : "Next"
     return(
@@ -13,6 +13,7 @@ const Step = ({children, stepId, title}) => {
             <FormActions
                 buttonText={buttonText}
                 hideBackButton={stepId > 1 ? false : true}
+                isDisabled={isDisabled}
             />
         </div>
     )
