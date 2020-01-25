@@ -2,20 +2,20 @@ import React from 'react'
 import StepSummary from './StepSummary'
 import { connect } from 'react-redux'
 
-const Progress = ({ activeId }) => {
+const Progress = ({ activeId, height, length, width, quantity }) => {
     return (
         <aside>
             <ul className="progress">
                 <StepSummary stepId={1} stepName="Dimensions &amp; Quantity" isActive={activeId === 1}>
                         <dl>
                             <dt>Width:</dt>
-                            <dd>0.0m</dd>
+                            <dd>{width}m</dd>
                             <dt>Height:</dt>
-                            <dd>0.0m</dd>
+                            <dd>{height}m</dd>
                             <dt>Length:</dt>
-                            <dd>0.0m</dd>
+                            <dd>{length}m</dd>
                             <dt>Quantity:</dt>
-                            <dd>0</dd>
+                            <dd>{quantity}</dd>
                         </dl>
                 </StepSummary>
                 <StepSummary stepId={2} stepName="Cardboard Grade" isActive={activeId === 2}>-</StepSummary>
@@ -33,5 +33,11 @@ const Progress = ({ activeId }) => {
 }
 
 export default connect(
-    state => ({ activeId: state.currentStep }),
+    state => ({
+        activeId: state.currentStep,
+        height: state.dimensions.length,
+        length: state.dimensions.length,
+        width: state.dimensions.width,
+        quantity: state.quantity.amount,
+    }),
 )(Progress)
