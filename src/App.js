@@ -1,11 +1,12 @@
 import React from "react"
 import { Provider } from "react-redux"
 import { configureStore } from "@reduxjs/toolkit"
-import { currentStep, dimensions, quantity } from "./reducers"
+import { cardboard, currentStep, dimensions, quantity } from "./reducers"
 import { Progress, StepContent, TotalCost, FormActions } from "./components"
 
 const store = configureStore({
     reducer: {
+        cardboard,
         currentStep,
         dimensions,
         quantity,
