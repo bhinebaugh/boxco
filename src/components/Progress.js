@@ -1,8 +1,9 @@
 import React from 'react'
-import StepSummary from './StepSummary'
 import { connect } from 'react-redux'
+import { calculatePrice } from '../reducers'
+import StepSummary from './StepSummary'
 
-const Progress = ({ activeId, height, length, width, quantity, cardboard, printQuality, selectedExtras }) => {
+const Progress = ({ activeId, height, length, width, quantity, cardboard, printQuality, selectedExtras, price }) => {
     return (
         <aside>
             <ul className="progress">
@@ -24,7 +25,7 @@ const Progress = ({ activeId, height, length, width, quantity, cardboard, printQ
                 <li>
                     <a href="#total-cost" className="step step-total-cost">
                         <h3 className="step-total-cost-heading">Total Cost</h3>
-                        <div className="step-total-cost-value">$0.00</div>
+                        <div className="step-total-cost-value">${price}</div>
                     </a>
                 </li>
             </ul>
@@ -35,12 +36,13 @@ const Progress = ({ activeId, height, length, width, quantity, cardboard, printQ
 export default connect(
     state => ({
         activeId: state.currentStep,
-        height: state.dimensions.length,
+        height: state.dimensions.height,
         length: state.dimensions.length,
         width: state.dimensions.width,
         quantity: state.quantity.amount,
         cardboard: state.cardboard,
         printQuality: state.printQuality,
         selectedExtras: state.selectedExtras,
+        price: calculatePrice(state)
     }),
 )(Progress)
